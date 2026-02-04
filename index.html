@@ -59,13 +59,13 @@
                 <label class="text-[10px] text-gray-500 uppercase">What gives uh the most of happiness?</label><textarea id="q10" class="input-field"></textarea>
                 <label class="text-[10px] text-gray-500 uppercase">Important Question: Who is my favorite Dost/Saheli? (Answer: Bilal)</label><input type="text" id="q11" class="input-field">
             </div>
-            <button onclick="nextScreen(4)" class="mt-6 bg-blue-600 text-white px-8 py-3 rounded-md font-bold w-full uppercase text-xs">Verify Data & Proceed</button>
+            <button onclick="startFinalTimer()" class="mt-6 bg-blue-600 text-white px-8 py-3 rounded-md font-bold w-full uppercase text-xs">Verify Data & Proceed</button>
         </div>
     </div>
 
     <div id="screen4" class="hidden z-10 w-full max-w-md text-center">
         <div class="glass p-12 rounded-2xl border-2 border-yellow-500">
-            <h2 class="text-xl font-bold mb-6">Get Ready for the most important question , Muhammad Bilal...</h2>
+            <h2 class="text-xl font-bold mb-6 text-white">Get Ready for the most important question, Muhammad Bilal...</h2>
             <div id="timer-display" class="text-7xl font-bold text-white mb-4">20</div>
             <p class="text-[10px] text-yellow-500 uppercase font-mono italic">Compiling final validation logic...</p>
         </div>
@@ -109,7 +109,9 @@
         function updateTimer() {
             const target = new Date("Oct 20, 2026 00:00:00").getTime();
             const now = new Date().getTime();
-            document.getElementById('countdown').innerText = Math.floor((target - now) / (1000 * 60 * 60 * 24)) + " Days Left";
+            const diff = target - now;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('countdown').innerText = (days > 0 ? days : 0) + " Days Left";
         }
         updateTimer();
 
@@ -135,17 +137,29 @@
             setTimeout(() => { 
                 stone.style.left = (end.left + 20) + 'px'; stone.style.top = (end.top + 20) + 'px';
                 stone.style.opacity = '0';
+                setTimeout(() => stone.remove(), 600);
             }, 50);
             document.getElementById('stone-log').innerText = msgs[stones];
             stones++;
         }
 
+        // IMPROVED TIMER LOGIC
         function startFinalTimer() {
+            // 1. Move to the timer screen
             nextScreen(4);
-            let t = 20;
-            const iv = setInterval(() => {
-                t--; document.getElementById('timer-display').innerText = t;
-                if (t <= 0) { clearInterval(iv); nextScreen(5); }
+            
+            // 2. Start the countdown
+            let timeLeft = 20;
+            const display = document.getElementById('timer-display');
+            
+            const interval = setInterval(() => {
+                timeLeft--;
+                display.innerText = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    nextScreen(5); // Go to the proposal
+                }
             }, 1000);
         }
 
@@ -157,9 +171,6 @@
             currentAssets = ['💋', '😘', '❤️', '💕', '💋'];
             nextScreen(6);
         }
-
-        // Custom Trigger for Screen 4
-        window.startFinalTimer = startFinalTimer;
     </script>
 </body>
 </html>
