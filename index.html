@@ -47,27 +47,27 @@
         <div class="glass p-6 md:p-10 rounded-2xl">
             <h2 class="text-xl font-mono text-blue-400 mb-6 border-b border-gray-700 pb-2 italic">Assigning System Variables...</h2>
             <div id="quiz-container" class="max-h-[50vh] overflow-y-auto pr-4">
-                <label class="text-[10px] text-gray-500 uppercase">Variable: Fav_Color</label><input type="text" id="q1" class="input-field">
-                <label class="text-[10px] text-gray-500 uppercase">Variable: Fav_Sport</label><input type="text" id="q2" class="input-field">
-                <label class="text-[10px] text-gray-500 uppercase">Variable: Fav_thing_to_do</label><input type="text" id="q3" class="input-field">
-                <label class="text-[10px] text-gray-500 uppercase">Variable: Person_whom_uh_can_call_your_home?</label><input type="text" id="q4" class="input-field">
-                <label class="text-[10px] text-gray-500 uppercase">Variable: Fream_Destination</label><input type="text" id="q5" class="input-field">
-                <label class="text-[10px] text-gray-500 uppercase">Variable: Fav_Car</label><input type="text" id="q6" class="input-field">
-                <label class="text-[10px] text-gray-500 uppercase">Variable: Fav_Cousin</label><select id="q7" class="input-field"><option>Ayesha Arshad</option></select>
-                <label class="text-[10px] text-gray-500 uppercase">Any nickname for Ayesha?</label><input type="text" id="q8" class="input-field">
-                <label class="text-[10px] text-gray-500 uppercase">What bothers you the most?</label><textarea id="q9" class="input-field"></textarea>
-                <label class="text-[10px] text-gray-500 uppercase">What gives uh the most of happiness?</label><textarea id="q10" class="input-field"></textarea>
-                <label class="text-[10px] text-gray-500 uppercase">Important Question: Who is my favorite Dost/Saheli? (Answer: Bilal)</label><input type="text" id="q11" class="input-field">
+                <label class="text-[10px] text-gray-500 uppercase">Variable: Fav_Color</label><input type="text" class="input-field">
+                <label class="text-[10px] text-gray-500 uppercase">Variable: Fav_Sport</label><input type="text" class="input-field">
+                <label class="text-[10px] text-gray-500 uppercase">Variable: Fav_thing_to_do</label><input type="text" class="input-field">
+                <label class="text-[10px] text-gray-500 uppercase">Variable: Person_whom_uh_can_call_your_home?</label><input type="text" class="input-field">
+                <label class="text-[10px] text-gray-500 uppercase">Variable: Dream_Destination</label><input type="text" class="input-field">
+                <label class="text-[10px] text-gray-500 uppercase">Variable: Fav_Car</label><input type="text" class="input-field">
+                <label class="text-[10px] text-gray-500 uppercase">Variable: Fav_Cousin</label><select class="input-field"><option>Ayesha Arshad</option></select>
+                <label class="text-[10px] text-gray-500 uppercase">Any nickname for Ayesha?</label><input type="text" class="input-field">
+                <label class="text-[10px] text-gray-500 uppercase">What bothers you the most?</label><textarea class="input-field"></textarea>
+                <label class="text-[10px] text-gray-500 uppercase">What gives uh the most of happiness?</label><textarea class="input-field"></textarea>
+                <label class="text-[10px] text-gray-500 uppercase">Important Question: Who is my favorite Dost/Saheli? (Answer: Bilal)</label><input type="text" class="input-field">
             </div>
-            <button onclick="startFinalTimer()" class="mt-6 bg-blue-600 text-white px-8 py-3 rounded-md font-bold w-full uppercase text-xs">Verify Data & Proceed</button>
+            <button onclick="nextScreen(4)" class="mt-6 bg-blue-600 text-white px-8 py-3 rounded-md font-bold w-full uppercase text-xs">Verify Data & Proceed</button>
         </div>
     </div>
 
     <div id="screen4" class="hidden z-10 w-full max-w-md text-center">
         <div class="glass p-12 rounded-2xl border-2 border-yellow-500">
             <h2 class="text-xl font-bold mb-6 text-white">Get Ready for the most important question, Muhammad Bilal...</h2>
-            <div id="timer-display" class="text-7xl font-bold text-white mb-4">20</div>
-            <p class="text-[10px] text-yellow-500 uppercase font-mono italic">Compiling final validation logic...</p>
+            <p class="text-[10px] text-yellow-500 uppercase font-mono italic mb-8">System is ready for Final Decision deployment.</p>
+            <button onclick="nextScreen(5)" class="bg-yellow-600 hover:bg-yellow-500 text-white px-10 py-4 rounded-full font-bold shadow-lg animate-pulse">I AM READY</button>
         </div>
     </div>
 
@@ -137,30 +137,9 @@
             setTimeout(() => { 
                 stone.style.left = (end.left + 20) + 'px'; stone.style.top = (end.top + 20) + 'px';
                 stone.style.opacity = '0';
-                setTimeout(() => stone.remove(), 600);
             }, 50);
             document.getElementById('stone-log').innerText = msgs[stones];
             stones++;
-        }
-
-        // IMPROVED TIMER LOGIC
-        function startFinalTimer() {
-            // 1. Move to the timer screen
-            nextScreen(4);
-            
-            // 2. Start the countdown
-            let timeLeft = 20;
-            const display = document.getElementById('timer-display');
-            
-            const interval = setInterval(() => {
-                timeLeft--;
-                display.innerText = timeLeft;
-                
-                if (timeLeft <= 0) {
-                    clearInterval(interval);
-                    nextScreen(5); // Go to the proposal
-                }
-            }, 1000);
         }
 
         function reconsider() {
