@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayesha-Bilal: RPA_Core_v2</title>
+    <title>Ayesha-Bilal: Final RPA Deployment</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { background: #0a0c10; color: #e6edf3; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
         .floating { position: fixed; top: -50px; pointer-events: none; animation: fall linear forwards; z-index: 50; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
-        .input-field { background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 12px; width: 100%; color: white; margin-bottom: 10px; font-size: 0.8rem; }
+        .input-field { background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 12px; width: 100%; color: white; margin-bottom: 10px; font-size: 0.85rem; }
         .stone { position: absolute; font-size: 2rem; transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); z-index: 100; pointer-events: none; }
         .btn-rpa { background: #238636; color: white; padding: 12px 24px; border-radius: 6px; font-weight: bold; transition: all 0.3s; }
         .btn-rpa:hover { background: #2ea043; transform: translateY(-2px); }
@@ -21,30 +21,24 @@
     <div id="bg-assets"></div>
 
     <div id="screen1" class="z-10 w-full max-w-md text-center">
-        <div class="glass p-8 rounded-2xl shadow-2xl border-t-4 border-blue-500">
-            <h1 class="text-3xl font-bold mb-2 text-white italic">Ayesha Misses Bilal</h1>
-            <p class="text-blue-400 font-mono text-[10px] mb-6 uppercase tracking-widest">Initialization: Dec 22, 2025 -> Oct 20, 2026</p>
+        <div class="glass p-8 rounded-2xl shadow-2xl border-t-4 border-pink-500">
+            <h1 class="text-3xl font-bold mb-2 text-white italic tracking-tight">Ayesha Misses Bilal</h1>
+            <p class="text-blue-400 font-mono text-[10px] mb-6 uppercase tracking-widest">Process ID: LOVE_2026_SYNC</p>
             <div id="countdown" class="text-2xl font-mono text-pink-500 mb-8 bg-black p-4 rounded-lg border border-pink-900/50">00 Days Left</div>
-            <button onclick="nextScreen(2)" class="btn-rpa w-full uppercase text-xs tracking-widest">Start Manual Sync Process</button>
+            <button onclick="nextScreen(2)" class="btn-rpa w-full uppercase text-xs tracking-widest">Run Initialization</button>
         </div>
     </div>
 
     <div id="screen2" class="hidden z-10 w-full max-w-2xl flex flex-col items-center">
         <div class="glass p-8 rounded-2xl w-full">
-            <div class="flex justify-between w-full mb-12 px-10">
-                <div id="ayesha-bot" class="text-center">
-                    <div class="text-5xl">👩🏻‍💻</div>
-                    <p class="text-[10px] text-pink-400 font-mono mt-2">Source: Ayesha</p>
-                </div>
-                <div id="bilal-bot" class="text-center">
-                    <div class="text-5xl">👨🏻‍💻</div>
-                    <p class="text-[10px] text-blue-400 font-mono mt-2">Target: Bilal</p>
-                </div>
+            <div class="flex justify-between w-full mb-12 px-10 relative">
+                <div id="ayesha-bot" class="text-center"><div class="text-5xl">👩🏻‍💻</div><p class="text-[10px] text-pink-400 font-mono mt-2">Ayesha</p></div>
+                <div id="bilal-bot" class="text-center"><div class="text-5xl">👨🏻‍💻</div><p class="text-[10px] text-blue-400 font-mono mt-2">Muhammad Bilal</p></div>
             </div>
             <div class="text-center">
-                <p id="stone-log" class="text-xs font-mono text-red-500 mb-6 italic animate-pulse">ERROR: System Latency Detected (Long Distance)</p>
-                <button id="throwBtn" onclick="throwStone()" class="bg-red-600 text-white px-8 py-3 rounded-full font-bold hover:scale-105 transition-all">Manual Override: Throw 🪨</button>
-                <button id="goToQuizBtn" onclick="nextScreen(3)" class="hidden bg-green-600 text-white px-8 py-3 rounded-full font-bold animate-bounce">System Restored: Start Quiz</button>
+                <p id="stone-log" class="text-sm font-mono text-red-500 h-12 mb-6 italic">Distance.exe is hurting. Override required.</p>
+                <button id="throwBtn" onclick="throwStone()" class="bg-red-600 text-white px-8 py-3 rounded-full font-bold hover:scale-105 transition-all">Manual Override (Throw 🪨)</button>
+                <button id="goToQuizBtn" onclick="nextScreen(3)" class="hidden bg-green-600 text-white px-8 py-3 rounded-full font-bold animate-bounce">Conflicts Resolved: Start Quiz</button>
             </div>
         </div>
     </div>
@@ -60,63 +54,57 @@
                 <label class="text-[10px] text-gray-500 uppercase">Variable: Destination</label><input type="text" id="q5" class="input-field">
                 <label class="text-[10px] text-gray-500 uppercase">Variable: Fav_Car</label><input type="text" id="q6" class="input-field">
                 <label class="text-[10px] text-gray-500 uppercase">Variable: Fav_Cousin</label><select id="q7" class="input-field"><option>Ayesha Arshad</option></select>
-                <label class="text-[10px] text-gray-500 uppercase">Variable: Fav_Sibling</label><input type="text" id="q8" class="input-field">
+                <label class="text-[10px] text-gray-500 uppercase">Any nickname for Ayesha?</label><input type="text" id="q8" class="input-field">
                 <label class="text-[10px] text-gray-500 uppercase">What bothers you the most?</label><textarea id="q9" class="input-field"></textarea>
-                <label class="text-[10px] text-gray-500 uppercase">When are you extremely happy?</label><textarea id="q10" class="input-field"></textarea>
-                <label class="text-[10px] text-gray-500 uppercase">Response to Ayesha Arshad?</label><textarea id="q11" class="input-field"></textarea>
+                <label class="text-[10px] text-gray-500 uppercase">When are you extreme happy?</label><textarea id="q10" class="input-field"></textarea>
+                <label class="text-[10px] text-gray-500 uppercase">Fun Question: Who is my favorite person? (Answer: Bilal)</label><input type="text" id="q11" class="input-field">
             </div>
-            <button onclick="nextScreen(4)" class="mt-6 bg-blue-600 text-white px-8 py-3 rounded-md font-bold w-full uppercase tracking-widest text-xs">Verify Data & Proceed</button>
+            <button onclick="nextScreen(4)" class="mt-6 bg-blue-600 text-white px-8 py-3 rounded-md font-bold w-full uppercase text-xs">Verify Data & Proceed</button>
         </div>
     </div>
 
     <div id="screen4" class="hidden z-10 w-full max-w-md text-center">
-        <div class="glass p-10 rounded-2xl border-2 border-yellow-500">
-            <h2 class="text-2xl font-bold text-white mb-6">Are you ready for the final and most important question of your life?</h2>
-            <p class="text-yellow-500 font-mono text-sm mb-8 italic">Answer very wisely. No Re-Try possible.</p>
-            <button onclick="startFinalTimer()" class="bg-yellow-600 text-white px-10 py-4 rounded-full font-bold shadow-lg">Confirm Readiness</button>
+        <div class="glass p-12 rounded-2xl border-2 border-yellow-500">
+            <h2 class="text-xl font-bold mb-6">Prepare for the Final Decision, Muhammad Bilal...</h2>
+            <div id="timer-display" class="text-7xl font-bold text-white mb-4">20</div>
+            <p class="text-[10px] text-yellow-500 uppercase font-mono italic">Compiling final validation logic...</p>
         </div>
     </div>
 
     <div id="screen5" class="hidden z-10 w-full max-w-md text-center">
-        <div class="glass p-12 rounded-2xl">
-            <p class="text-blue-400 font-mono text-sm mb-4">Processing Decision Logic...</p>
-            <div id="timer-display" class="text-7xl font-bold text-white">20</div>
-            <p class="text-gray-500 text-[10px] mt-4 uppercase">Status: Compiling Feelings</p>
-        </div>
-    </div>
-
-    <div id="screen6" class="hidden z-10 w-full max-w-md text-center relative">
         <div class="glass p-10 rounded-2xl border-4 border-pink-500 shadow-2xl">
-            <h2 class="text-2xl font-bold text-white mb-8">Bilal Arshad, will you be my Valentine?</h2>
+            <h2 class="text-2xl font-bold text-white mb-8">Muhammad Bilal, will you be my Valentine?</h2>
             <div class="flex flex-col gap-4">
-                <button onclick="finishAll()" class="bg-pink-600 text-white px-10 py-4 rounded-full font-bold text-xl hover:scale-105 transition-all shadow-lg">YES! ❤️</button>
-                <button id="no-btn" onclick="reconsider()" class="text-gray-600 text-xs underline">No</button>
+                <button onclick="celebrate()" class="bg-pink-600 text-white px-10 py-4 rounded-full font-bold text-xl hover:scale-110 transition-all">YES! ❤️</button>
+                <button onclick="reconsider()" class="text-gray-600 text-xs underline cursor-pointer">No</button>
             </div>
         </div>
     </div>
 
-    <div id="screen7" class="hidden z-10 w-full max-w-2xl">
-        <div class="glass p-8 rounded-2xl">
-            <h2 class="text-2xl font-bold text-green-400 mb-4 uppercase">Log: Validation Successful</h2>
-            <div id="final-log" class="font-mono text-[10px] space-y-1 bg-black/90 p-6 rounded-lg text-green-500 border border-green-900 h-64 overflow-y-auto"></div>
-            <p class="mt-8 text-center text-lg italic text-pink-400">"Every bot has a logic, but our love is an infinite loop."</p>
-            <p class="text-[10px] text-gray-600 text-center mt-4">Take a screenshot and send to Ayesha.</p>
+    <div id="screen6" class="hidden z-10 w-full max-w-md text-center">
+        <div class="glass p-12 rounded-2xl border-4 border-green-500">
+            <h2 class="text-3xl font-bold text-white mb-6">Excellent Decision!</h2>
+            <p class="text-lg text-green-400 mb-8 font-mono tracking-tighter italic">"You chose the right decision and now be happy."</p>
+            <p class="text-[10px] text-gray-500">System Log: Success. <br> Muhammad Bilal & Ayesha Arshad synchronized.</p>
         </div>
     </div>
 
     <script>
-        // High-Quality Asset Rain
-        const assets = ['❤️', '🌸', '💖', '🌷', '🎈', '✨'];
-        setInterval(() => {
-            const el = document.createElement('div');
-            el.className = 'floating';
-            el.innerText = assets[Math.floor(Math.random() * assets.length)];
-            el.style.left = Math.random() * 100 + 'vw';
-            el.style.fontSize = (Math.random() * 20 + 20) + 'px';
-            el.style.animationDuration = (Math.random() * 3 + 2) + 's';
-            document.getElementById('bg-assets').appendChild(el);
-            setTimeout(() => el.remove(), 5000);
-        }, 200);
+        let currentAssets = ['❤️', '🌸', '💖', '🌷', '✨'];
+        
+        function rainAssets() {
+            setInterval(() => {
+                const el = document.createElement('div');
+                el.className = 'floating';
+                el.innerText = currentAssets[Math.floor(Math.random() * currentAssets.length)];
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                el.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                document.getElementById('bg-assets').appendChild(el);
+                setTimeout(() => el.remove(), 5000);
+            }, 250);
+        }
+        rainAssets();
 
         function updateTimer() {
             const target = new Date("Oct 20, 2026 00:00:00").getTime();
@@ -130,13 +118,12 @@
             document.getElementById('screen' + num).classList.remove('hidden');
         }
 
-        let stonesThrown = 0;
+        let stones = 0;
+        const msgs = ["I miss you!", "Long distance hurts!", "Feel this!", "Please come soon!", "Syncing..."];
         function throwStone() {
-            if (stonesThrown >= 3) {
+            if (stones >= 4) {
                 document.getElementById('throwBtn').classList.add('hidden');
                 document.getElementById('goToQuizBtn').classList.remove('hidden');
-                document.getElementById('stone-log').innerText = "SYSTEM SYNC COMPLETE.";
-                document.getElementById('stone-log').className = "text-xs font-mono text-green-500 mb-6";
                 return;
             }
             const stone = document.createElement('div');
@@ -149,42 +136,30 @@
                 stone.style.left = (end.left + 20) + 'px'; stone.style.top = (end.top + 20) + 'px';
                 stone.style.opacity = '0';
             }, 50);
-            stonesThrown++;
-            document.getElementById('stone-log').innerText = `Sending Conflict Resolution Ping ${stonesThrown}...`;
+            document.getElementById('stone-log').innerText = msgs[stones];
+            stones++;
         }
 
         function startFinalTimer() {
-            nextScreen(5);
-            let time = 20;
-            const interval = setInterval(() => {
-                time--;
-                document.getElementById('timer-display').innerText = time;
-                if (time <= 0) { clearInterval(interval); nextScreen(6); }
+            nextScreen(4);
+            let t = 20;
+            const iv = setInterval(() => {
+                t--; document.getElementById('timer-display').innerText = t;
+                if (t <= 0) { clearInterval(iv); nextScreen(5); }
             }, 1000);
         }
 
         function reconsider() {
-            alert("RPA_DEBUGGER_ALERT: User decision 'No' rejected by Ayesha's Global Logic. Please reconsider and retry the 'Yes' path for successful deployment.");
+            alert("EXCEPTION_HANDLING: 'No' is not a valid output for Muhammad Bilal. Error in line 'Heart.logic'. Please click Yes to resolve.");
         }
 
-        function finishAll() {
-            const logs = [
-                `Status: VALENTINE_ENGAGED`,
-                `Fav_Color: ${document.getElementById('q1').value}`,
-                `Fav_Sport: ${document.getElementById('q2').value}`,
-                `Fav_Wear: ${document.getElementById('q3').value}`,
-                `Fav_Place: ${document.getElementById('q4').value}`,
-                `Destination: ${document.getElementById('q5').value}`,
-                `Fav_Car: ${document.getElementById('q6').value}`,
-                `Fav_Cousin: ${document.getElementById('q7').value}`,
-                `Fav_Sibling: ${document.getElementById('q8').value}`,
-                `Bothers_Him: ${document.getElementById('q9').value}`,
-                `Happy_When: ${document.getElementById('q10').value}`,
-                `Final_Message: ${document.getElementById('q11').value}`
-            ];
-            document.getElementById('final-log').innerHTML = logs.map(line => `<p>> [STAGING] ${line}</p>`).join('');
-            nextScreen(7);
+        function celebrate() {
+            currentAssets = ['💋', '😘', '❤️', '💕', '💋'];
+            nextScreen(6);
         }
+
+        // Custom Trigger for Screen 4
+        window.startFinalTimer = startFinalTimer;
     </script>
 </body>
 </html>
