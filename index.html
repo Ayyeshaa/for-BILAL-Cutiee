@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Bilal | By Ayesha</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap');
+        
+        body { font-family: 'Space Grotesk', sans-serif; background: #0a0a0a; color: white; overflow-x: hidden; }
+        
+        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        
+        /* Stone Animation */
+        .stone { 
+            position: absolute; 
+            width: 20px; height: 20px; 
+            background: #4a5568; border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center;
+            font-size: 10px; color: white; white-space: nowrap;
+            box-shadow: 0 0 10px rgba(255,255,255,0.2);
+        }
+
+        .shake { animation: shake 0.5s; }
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(5px); }
+            50% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+            100% { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+
+    <div id="screen1" class="text-center p-8 max-w-lg">
+        <h1 class="text-4xl font-bold mb-4 bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-transparent">Hi Bilal...</h1>
+        <p class="text-gray-400 mb-8 leading-relaxed">I don't know what you are expecting, but here is a work of art created by <span class="text-white font-bold underline">Ayesha Arshad</span>.</p>
+        <button onclick="nextScreen(2)" class="px-8 py-3 bg-white text-black rounded-full font-bold hover:scale-105 transition-transform">Enter Experience</button>
+    </div>
+
+    <div id="screen2" class="hidden w-full h-screen relative flex flex-col items-center justify-between py-20">
+        <div class="flex justify-between w-full px-12 md:px-40 relative h-64">
+            <div id="ayesha" class="flex flex-col items-center gap-2">
+                <div class="w-16 h-16 bg-pink-500 rounded-full flex items-center justify-center text-2xl">👩🏻‍💻</div>
+                <span class="text-xs font-mono uppercase tracking-widest">Ayesha</span>
+            </div>
+            
+            <div id="bilal" class="flex flex-col items-center gap-2">
+                <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center text-2xl">👨🏻‍💻</div>
+                <span class="text-xs font-mono uppercase tracking-widest">Bilal</span>
+            </div>
+        </div>
+
+        <div class="glass p-6 rounded-2xl text-center max-w-sm mx-auto">
+            <p id="instruction" class="text-sm text-gray-300 mb-4 italic">"It hurts being in long distance, Bilal. I want you to feel this too..."</p>
+            <button id="throwBtn" onclick="throwStone()" class="px-6 py-2 border border-pink-500 text-pink-500 rounded-lg hover:bg-pink-500 hover:text-white transition-all">
+                Throw a Memory 🪨
+            </button>
+        </div>
+        
+        <button id="galleryBtn" onclick="nextScreen(3)" class="hidden mt-4 px-6 py-2 bg-green-500 rounded-full font-bold animate-bounce">
+            Open Our Memories 📸
+        </button>
+    </div>
+
+    <div id="screen3" class="hidden w-full max-w-4xl p-4">
+        <h2 class="text-3xl font-bold text-center mb-10">Our Deployment History</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="glass h-64 rounded-xl flex items-center justify-center overflow-hidden">
+                <img src="YOUR_IMAGE_LINK_1" alt="Memory 1" class="w-full h-full object-cover opacity-50 hover:opacity-100 transition-opacity">
+            </div>
+            <div class="glass h-64 rounded-xl flex items-center justify-center overflow-hidden">
+                <img src="YOUR_IMAGE_LINK_2" alt="Memory 2" class="w-full h-full object-cover opacity-50 hover:opacity-100 transition-opacity">
+            </div>
+        </div>
+        <div class="text-center mt-12">
+            <p class="text-xl italic">Happy Valentine's Day, Bilal! <br> Let's merge these branches soon. ❤️</p>
+        </div>
+    </div>
+
+    <script>
+        let throwCount = 0;
+        const messages = [
+            "I miss you!",
+            "It hurts!",
+            "Feel this!",
+            "Come back!",
+            "Soon..."
+        ];
+
+        function nextScreen(num) {
+            document.querySelectorAll('div[id^="screen"]').forEach(s => s.classList.add('hidden'));
+            document.getElementById('screen' + num).classList.remove('hidden');
+        }
+
+        function throwStone() {
+            if (throwCount >= messages.length) return;
+
+            const stone = document.createElement('div');
+            stone.className = 'stone';
+            stone.innerText = messages[throwCount];
+            
+            const ayeshaPos = document.getElementById('ayesha').getBoundingClientRect();
+            const bilalPos = document.getElementById('bilal').getBoundingClientRect();
+            
+            stone.style.left = (ayeshaPos.left + 30) + 'px';
+            stone.style.top = (ayeshaPos.top + 30) + 'px';
+            document.body.appendChild(stone);
+
+            // Animate Stone
+            setTimeout(() => {
+                stone.style.transition = 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                stone.style.left = (bilalPos.left + 20) + 'px';
+                stone.style.top = (bilalPos.top + 20) + 'px';
+            }, 50);
+
+            // Impact
+            setTimeout(() => {
+                document.getElementById('bilal').classList.add('shake');
+                stone.style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('bilal').classList.remove('shake');
+                    stone.remove();
+                }, 500);
+                
+                throwCount++;
+                if (throwCount === messages.length) {
+                    document.getElementById('throwBtn').classList.add('hidden');
+                    document.getElementById('instruction').innerText = "Distance closed. You felt it, right?";
+                    document.getElementById('galleryBtn').classList.remove('hidden');
+                }
+            }, 850);
+        }
+    </script>
+</body>
+</html>
