@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayesha-Bilal: RPA Core</title>
+    <title>Ayesha-Bilal: Final Validation</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { background: #0a0c10; color: #e6edf3; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
-        
-        /* Hearts & Flowers Animation */
         .floating { position: fixed; top: -50px; pointer-events: none; animation: fall linear forwards; z-index: 0; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
-
         .input-field { background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 10px; width: 100%; color: white; margin-bottom: 15px; }
-        .input-field:focus { border-color: #58a6ff; outline: none; }
     </style>
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen p-4">
@@ -22,78 +18,57 @@
     <div id="bg-assets"></div>
 
     <div id="screen1" class="z-10 w-full max-w-md text-center">
-        <div class="glass p-8 rounded-2xl shadow-2xl">
+        <div class="glass p-8 rounded-2xl shadow-2xl border-t-4 border-pink-500">
             <h1 class="text-3xl font-bold mb-2 text-white italic">Ayesha Misses Bilal</h1>
-            <p class="text-blue-400 font-mono text-xs mb-6 tracking-widest uppercase">Distance Counter Initialized</p>
-            
-            <div id="countdown" class="text-2xl font-mono text-pink-500 mb-8 bg-black p-4 rounded-lg border border-pink-900/50">
-                00 Days Left
-            </div>
-
-            <button onclick="nextScreen(2)" class="bg-pink-600 hover:bg-pink-500 text-white px-8 py-3 rounded-full font-bold w-full transition-all">
-                Enter Quiz Mode
-            </button>
+            <p class="text-blue-400 font-mono text-xs mb-6 tracking-widest uppercase text-center">RPA Logic: Distance != Love</p>
+            <div id="countdown" class="text-2xl font-mono text-pink-500 mb-8 bg-black p-4 rounded-lg border border-pink-900/50">00 Days Left</div>
+            <button onclick="nextScreen(2)" class="bg-pink-600 hover:bg-pink-500 text-white px-8 py-3 rounded-full font-bold w-full transition-all shadow-lg shadow-pink-500/20">Initialize Relationship Quiz</button>
         </div>
     </div>
 
     <div id="screen2" class="hidden z-10 w-full max-w-xl">
         <div class="glass p-6 md:p-10 rounded-2xl">
             <h2 class="text-xl font-mono text-blue-400 mb-6 border-b border-gray-700 pb-2">Bot Input Required: Profile Setup</h2>
-            
-            <div id="quiz-container" class="max-h-[60vh] overflow-y-auto pr-2">
-                <label class="text-xs text-gray-400">Favorite Color?</label>
-                <input type="text" id="q1" class="input-field" placeholder="Type here...">
-
-                <label class="text-xs text-gray-400">Favorite Sport?</label>
-                <input type="text" id="q2" class="input-field">
-
-                <label class="text-xs text-gray-400">Favorite Thing to Wear?</label>
-                <input type="text" id="q3" class="input-field">
-
-                <label class="text-xs text-gray-400">Place to Go?</label>
-                <input type="text" id="q4" class="input-field">
-
-                <label class="text-xs text-gray-400">Favorite Destination?</label>
-                <input type="text" id="q5" class="input-field">
-
-                <label class="text-xs text-gray-400">Favorite Car?</label>
-                <input type="text" id="q6" class="input-field">
-
+            <div id="quiz-container" class="max-h-[50vh] overflow-y-auto pr-2">
+                <label class="text-xs text-gray-400">Favorite Color?</label><input type="text" id="q1" class="input-field">
+                <label class="text-xs text-gray-400">Favorite Sport?</label><input type="text" id="q2" class="input-field">
+                <label class="text-xs text-gray-400">Favorite Thing to Wear?</label><input type="text" id="q3" class="input-field">
+                <label class="text-xs text-gray-400">Place to Go?</label><input type="text" id="q4" class="input-field">
+                <label class="text-xs text-gray-400">Favorite Destination?</label><input type="text" id="q5" class="input-field">
+                <label class="text-xs text-gray-400">Favorite Car?</label><input type="text" id="q6" class="input-field">
                 <label class="text-xs text-gray-400">Favorite Cousin?</label>
-                <select id="q7" class="input-field">
-                    <option value="Ayesha Arshad">Ayesha Arshad</option>
-                </select>
-
-                <label class="text-xs text-gray-400">Favorite Sibling?</label>
-                <input type="text" id="q8" class="input-field">
-
-                <label class="text-xs text-gray-400">What bothers you the most?</label>
-                <textarea id="q9" class="input-field h-20"></textarea>
-
-                <label class="text-xs text-gray-400">When are you extremely happy?</label>
-                <textarea id="q10" class="input-field h-20"></textarea>
-
-                <label class="text-xs text-gray-400">Anything you want to say to Ayesha?</label>
-                <textarea id="q11" class="input-field h-20"></textarea>
+                <select id="q7" class="input-field"><option value="Ayesha Arshad">Ayesha Arshad</option></select>
+                <label class="text-xs text-gray-400">Favorite Sibling?</label><input type="text" id="q8" class="input-field">
+                <label class="text-xs text-gray-400">What bothers you the most?</label><textarea id="q9" class="input-field"></textarea>
+                <label class="text-xs text-gray-400">When are you extremely happy?</label><textarea id="q10" class="input-field"></textarea>
+                <label class="text-xs text-gray-400">Anything you want to say to Ayesha?</label><textarea id="q11" class="input-field"></textarea>
             </div>
-
-            <button onclick="finishQuiz()" class="mt-6 bg-green-600 hover:bg-green-500 text-white px-8 py-3 rounded-md font-bold w-full">
-                Finalize Configuration
-            </button>
+            <button onclick="nextScreen(3)" class="mt-6 bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-md font-bold w-full">Proceed to Final Proposal</button>
         </div>
     </div>
 
-    <div id="screen3" class="hidden z-10 w-full max-w-2xl">
+    <div id="screen3" class="hidden z-10 w-full max-w-md text-center">
+        <div class="glass p-10 rounded-2xl border-2 border-pink-500 animate-pulse">
+            <h2 class="text-4xl font-bold text-white mb-6">Bilal Arshad...</h2>
+            <p class="text-xl mb-8 text-pink-300">Will you be my Valentine?</p>
+            <div class="flex justify-center">
+                <button onclick="finishAll()" class="bg-pink-600 hover:bg-pink-500 text-white text-2xl px-12 py-6 rounded-full font-black shadow-2xl hover:scale-110 transition-transform">
+                    YES, I WILL! ❤️
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="screen4" class="hidden z-10 w-full max-w-2xl">
         <div class="glass p-8 rounded-2xl">
-            <h2 class="text-2xl font-bold text-green-400 mb-4">Configuration Log Generated</h2>
-            <div id="final-log" class="font-mono text-sm space-y-2 bg-black/50 p-6 rounded-lg text-gray-300">
-                </div>
-            <p class="mt-8 text-center italic text-pink-400">"Ayesha Arshad missed Bilal while coding this."</p>
+            <h2 class="text-2xl font-bold text-green-400 mb-4 uppercase tracking-tighter">System Log: Engagement Confirmed</h2>
+            <div id="final-log" class="font-mono text-xs space-y-2 bg-black/80 p-6 rounded-lg text-green-500 border border-green-900 shadow-inner overflow-y-auto max-h-64"></div>
+            <p class="mt-8 text-center text-lg font-serif italic text-pink-400">"Ayesha Arshad missed Bilal every second while coding this."</p>
+            <p class="text-[10px] text-gray-600 mt-4 text-center">Process status: COMPLETED. Please take a screenshot for Ayesha.</p>
         </div>
     </div>
 
     <script>
-        // Background Assets (Hearts & Flowers)
         const assets = ['❤️', '🌸', '💖', '🌷', '✨'];
         setInterval(() => {
             const el = document.createElement('div');
@@ -104,15 +79,13 @@
             el.style.animationDuration = (Math.random() * 3 + 2) + 's';
             document.getElementById('bg-assets').appendChild(el);
             setTimeout(() => el.remove(), 5000);
-        }, 300);
+        }, 200);
 
-        // Countdown Logic
-        const targetDate = new Date("Oct 20, 2026 00:00:00").getTime();
         function updateCountdown() {
+            const target = new Date("Oct 20, 2026 00:00:00").getTime();
             const now = new Date().getTime();
-            const diff = targetDate - now;
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            document.getElementById('countdown').innerText = days + " Days to Meet";
+            const days = Math.floor((target - now) / (1000 * 60 * 60 * 24));
+            document.getElementById('countdown').innerText = days + " Days Until We Meet";
         }
         updateCountdown();
 
@@ -121,8 +94,9 @@
             document.getElementById('screen' + num).classList.remove('hidden');
         }
 
-        function finishQuiz() {
+        function finishAll() {
             const logs = [
+                `Proposal Status: ACCEPTED`,
                 `Color: ${document.getElementById('q1').value}`,
                 `Sport: ${document.getElementById('q2').value}`,
                 `Wear: ${document.getElementById('q3').value}`,
@@ -133,12 +107,10 @@
                 `Sibling: ${document.getElementById('q8').value}`,
                 `Bothered By: ${document.getElementById('q9').value}`,
                 `Happy When: ${document.getElementById('q10').value}`,
-                `Message: ${document.getElementById('q11').value}`
+                `Message to Ayesha: ${document.getElementById('q11').value}`
             ];
-
-            const logHtml = logs.map(line => `<p>> [DATA_SYNC] ${line}</p>`).join('');
-            document.getElementById('final-log').innerHTML = logHtml;
-            nextScreen(3);
+            document.getElementById('final-log').innerHTML = logs.map(line => `<p>> [STAGING] ${line}</p>`).join('');
+            nextScreen(4);
         }
     </script>
 </body>
