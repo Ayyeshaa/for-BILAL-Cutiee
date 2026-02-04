@@ -3,133 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayesha-Bilal Logic Flow</title>
+    <title>Ayesha-Bilal: RPA Core</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Modern Glassmorphism & RPA UI */
         body { background: #0a0c10; color: #e6edf3; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        .rpa-border { border: 1px solid #30363d; background: #161b22; }
-        .btn-action { background: #238636; transition: all 0.3s ease; }
-        .btn-action:hover { background: #2ea043; transform: scale(1.05); }
-        .stone { position: absolute; z-index: 100; font-size: 2.5rem; transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .bento-card { background: #1c2128; border: 1px solid #444c56; border-radius: 12px; padding: 1.5rem; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        
+        /* Hearts & Flowers Animation */
+        .floating { position: fixed; top: -50px; pointer-events: none; animation: fall linear forwards; z-index: 0; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+
+        .input-field { background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 10px; width: 100%; color: white; margin-bottom: 15px; }
+        .input-field:focus { border-color: #58a6ff; outline: none; }
     </style>
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen p-4">
 
-    <div id="screen1" class="w-full max-w-md text-center">
-        <div class="rpa-border p-6 rounded-xl shadow-2xl">
-            <div class="text-blue-400 font-mono text-xs mb-4 uppercase tracking-tighter text-left border-b border-gray-700 pb-2">
-                System_Check // Ayesha Arshad Studio
-            </div>
-            <h1 class="text-2xl font-bold mb-4 text-white">Initialization Successful.</h1>
-            <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                Bilal, I don't know what you were expecting, but this is a custom-coded work of art, automated just for you.
-            </p>
-            <button onclick="nextScreen(2)" class="btn-action text-white px-8 py-3 rounded-md font-semibold w-full shadow-lg">
-                Run "Valentine_Bot.xaml"
-            </button>
-        </div>
-    </div>
+    <div id="bg-assets"></div>
 
-    <div id="screen2" class="hidden w-full max-w-2xl h-full flex flex-col items-center">
-        <div class="w-full rpa-border rounded-xl p-4 md:p-8 flex flex-col items-center">
-            <div class="flex justify-between w-full mb-12">
-                <div id="ayesha-bot" class="text-center">
-                    <div class="w-16 h-16 bg-pink-600 rounded-lg flex items-center justify-center text-3xl shadow-lg border-2 border-pink-400">👩🏻‍💻</div>
-                    <p class="text-[10px] mt-2 font-mono text-pink-400 uppercase">Input_Ayesha</p>
-                </div>
-                <div id="bilal-bot" class="text-center">
-                    <div class="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center text-3xl shadow-lg border-2 border-blue-400">👨🏻‍💻</div>
-                    <p class="text-[10px] mt-2 font-mono text-blue-400 uppercase">Process_Bilal</p>
-                </div>
-            </div>
-
-            <div id="log-box" class="w-full bg-black rounded p-4 mb-8 h-24 overflow-y-auto font-mono text-xs text-green-500 border border-gray-800">
-                > Waiting for Manual Intervention...<br>
-                > Error: Distance_Gap found.
-            </div>
-
-            <button id="throwBtn" onclick="throwStone()" class="bg-red-600 hover:bg-red-500 text-white px-6 py-4 rounded-full font-bold shadow-xl animate-pulse active:scale-95 w-full md:w-auto">
-                Override Conflict (Throw Stone) 🪨
-            </button>
-        </div>
-    </div>
-
-    <div id="screen3" class="hidden w-full max-w-4xl animate-in fade-in duration-700">
-        <h2 class="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-blue-400 to-pink-500 bg-clip-text text-transparent">Deployment Log: Success</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="bento-card md:col-span-2 md:row-span-2 overflow-hidden flex items-center justify-center min-h-[300px]">
-                <img src="pic1.jpg" class="w-full h-full object-cover rounded-lg" alt="Memory 1">
-            </div>
+    <div id="screen1" class="z-10 w-full max-w-md text-center">
+        <div class="glass p-8 rounded-2xl shadow-2xl">
+            <h1 class="text-3xl font-bold mb-2 text-white italic">Ayesha Misses Bilal</h1>
+            <p class="text-blue-400 font-mono text-xs mb-6 tracking-widest uppercase">Distance Counter Initialized</p>
             
-            <div class="bento-card flex flex-col justify-center border-l-4 border-blue-500">
-                <p class="text-blue-400 text-xs font-mono">variable.partner_name</p>
-                <p class="text-xl font-bold">Bilal Arshad</p>
+            <div id="countdown" class="text-2xl font-mono text-pink-500 mb-8 bg-black p-4 rounded-lg border border-pink-900/50">
+                00 Days Left
             </div>
 
-            <div class="bento-card overflow-hidden h-48">
-                <img src="pic2.jpg" class="w-full h-full object-cover rounded-lg" alt="Memory 2">
+            <button onclick="nextScreen(2)" class="bg-pink-600 hover:bg-pink-500 text-white px-8 py-3 rounded-full font-bold w-full transition-all">
+                Enter Quiz Mode
+            </button>
+        </div>
+    </div>
+
+    <div id="screen2" class="hidden z-10 w-full max-w-xl">
+        <div class="glass p-6 md:p-10 rounded-2xl">
+            <h2 class="text-xl font-mono text-blue-400 mb-6 border-b border-gray-700 pb-2">Bot Input Required: Profile Setup</h2>
+            
+            <div id="quiz-container" class="max-h-[60vh] overflow-y-auto pr-2">
+                <label class="text-xs text-gray-400">Favorite Color?</label>
+                <input type="text" id="q1" class="input-field" placeholder="Type here...">
+
+                <label class="text-xs text-gray-400">Favorite Sport?</label>
+                <input type="text" id="q2" class="input-field">
+
+                <label class="text-xs text-gray-400">Favorite Thing to Wear?</label>
+                <input type="text" id="q3" class="input-field">
+
+                <label class="text-xs text-gray-400">Place to Go?</label>
+                <input type="text" id="q4" class="input-field">
+
+                <label class="text-xs text-gray-400">Favorite Destination?</label>
+                <input type="text" id="q5" class="input-field">
+
+                <label class="text-xs text-gray-400">Favorite Car?</label>
+                <input type="text" id="q6" class="input-field">
+
+                <label class="text-xs text-gray-400">Favorite Cousin?</label>
+                <select id="q7" class="input-field">
+                    <option value="Ayesha Arshad">Ayesha Arshad</option>
+                </select>
+
+                <label class="text-xs text-gray-400">Favorite Sibling?</label>
+                <input type="text" id="q8" class="input-field">
+
+                <label class="text-xs text-gray-400">What bothers you the most?</label>
+                <textarea id="q9" class="input-field h-20"></textarea>
+
+                <label class="text-xs text-gray-400">When are you extremely happy?</label>
+                <textarea id="q10" class="input-field h-20"></textarea>
+
+                <label class="text-xs text-gray-400">Anything you want to say to Ayesha?</label>
+                <textarea id="q11" class="input-field h-20"></textarea>
             </div>
 
-            <div class="bento-card md:col-span-3 text-center py-8">
-                <p class="text-xl italic text-gray-300">"Every bot has a logic, but our love has no end loop. Happy Valentine's Day!"</p>
-            </div>
+            <button onclick="finishQuiz()" class="mt-6 bg-green-600 hover:bg-green-500 text-white px-8 py-3 rounded-md font-bold w-full">
+                Finalize Configuration
+            </button>
+        </div>
+    </div>
+
+    <div id="screen3" class="hidden z-10 w-full max-w-2xl">
+        <div class="glass p-8 rounded-2xl">
+            <h2 class="text-2xl font-bold text-green-400 mb-4">Configuration Log Generated</h2>
+            <div id="final-log" class="font-mono text-sm space-y-2 bg-black/50 p-6 rounded-lg text-gray-300">
+                </div>
+            <p class="mt-8 text-center italic text-pink-400">"Ayesha Arshad missed Bilal while coding this."</p>
         </div>
     </div>
 
     <script>
-        let count = 0;
-        const messages = [
-            "Syncing Hearts...",
-            "Sending: I miss you!",
-            "Sending: It hurts!",
-            "Sending: Come closer!",
-            "Finalizing Sync..."
-        ];
+        // Background Assets (Hearts & Flowers)
+        const assets = ['❤️', '🌸', '💖', '🌷', '✨'];
+        setInterval(() => {
+            const el = document.createElement('div');
+            el.className = 'floating';
+            el.innerText = assets[Math.floor(Math.random() * assets.length)];
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            el.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            document.getElementById('bg-assets').appendChild(el);
+            setTimeout(() => el.remove(), 5000);
+        }, 300);
+
+        // Countdown Logic
+        const targetDate = new Date("Oct 20, 2026 00:00:00").getTime();
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('countdown').innerText = days + " Days to Meet";
+        }
+        updateCountdown();
 
         function nextScreen(num) {
             document.querySelectorAll('div[id^="screen"]').forEach(s => s.classList.add('hidden'));
             document.getElementById('screen' + num).classList.remove('hidden');
         }
 
-        function throwStone() {
-            if (count >= messages.length) {
-                nextScreen(3);
-                return;
-            }
+        function finishQuiz() {
+            const logs = [
+                `Color: ${document.getElementById('q1').value}`,
+                `Sport: ${document.getElementById('q2').value}`,
+                `Wear: ${document.getElementById('q3').value}`,
+                `Place: ${document.getElementById('q4').value}`,
+                `Destination: ${document.getElementById('q5').value}`,
+                `Car: ${document.getElementById('q6').value}`,
+                `Cousin: ${document.getElementById('q7').value}`,
+                `Sibling: ${document.getElementById('q8').value}`,
+                `Bothered By: ${document.getElementById('q9').value}`,
+                `Happy When: ${document.getElementById('q10').value}`,
+                `Message: ${document.getElementById('q11').value}`
+            ];
 
-            const stone = document.createElement('div');
-            stone.className = 'stone';
-            stone.innerText = '🪨';
-            
-            const start = document.getElementById('ayesha-bot').getBoundingClientRect();
-            const end = document.getElementById('bilal-bot').getBoundingClientRect();
-
-            stone.style.left = (start.left + 20) + 'px';
-            stone.style.top = (start.top + 20) + 'px';
-            document.body.appendChild(stone);
-
-            const log = document.getElementById('log-box');
-            log.innerHTML += `<br>> [EXEC] ${messages[count]}`;
-            log.scrollTop = log.scrollHeight;
-
-            setTimeout(() => {
-                stone.style.left = (end.left + 20) + 'px';
-                stone.style.top = (end.top + 20) + 'px';
-                stone.style.transform = 'rotate(360deg) scale(0.5)';
-                stone.style.opacity = '0';
-            }, 100);
-
-            setTimeout(() => {
-                stone.remove();
-                count++;
-                if (count === messages.length) {
-                    document.getElementById('throwBtn').innerText = "View Final Deployment";
-                    document.getElementById('throwBtn').classList.replace('bg-red-600', 'bg-blue-600');
-                }
-            }, 800);
+            const logHtml = logs.map(line => `<p>> [DATA_SYNC] ${line}</p>`).join('');
+            document.getElementById('final-log').innerHTML = logHtml;
+            nextScreen(3);
         }
     </script>
 </body>
