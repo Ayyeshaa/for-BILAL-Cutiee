@@ -6,175 +6,208 @@
     <title>Ayesha-Bilal: The Love System</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: #050505; color: #e6edf3; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.05); }
+        body { background: #0a0c10; color: #e6edf3; font-family: 'Inter', sans-serif; overflow-x: hidden; margin: 0; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
         
-        /* Gold & Rose Particles */
-        .particle { position: fixed; top: -20px; pointer-events: none; animation: fall linear forwards; z-index: 50; }
+        /* Particle System */
+        .particle { position: fixed; top: -20px; pointer-events: none; animation: fall linear forwards; z-index: 1; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
-        /* 3D Rose Styling */
+        /* The Rose Assembly - Centered & Symmetrical */
         .rose-stage { 
-            position: relative; width: 280px; height: 280px; margin: 20px auto; 
-            display: flex; justify-content: center; align-items: center;
+            position: relative; width: 220px; height: 220px; 
+            margin: 30px auto; display: flex; justify-content: center; align-items: center;
         }
-        .petal-3d { 
-            position: absolute; width: 80px; height: 110px; 
-            background: radial-gradient(circle at 30% 30%, #ff2d2d, #800000 80%);
+        .petal-unit { 
+            position: absolute; width: 55px; height: 85px; 
+            background: radial-gradient(circle at 35% 35%, #ff3333, #800000 90%);
             border-radius: 50% 50% 20% 20%; opacity: 0; 
-            transform-origin: bottom center; transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: inset -5px -10px 20px rgba(0,0,0,0.5), 0 5px 15px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.1);
+            transform-origin: bottom center; transition: all 0.5s ease-out;
+            box-shadow: inset -2px -5px 15px rgba(0,0,0,0.4), 0 4px 8px rgba(0,0,0,0.3);
+            bottom: 50%;
         }
-        .center-core {
-            position: absolute; width: 50px; height: 50px; 
-            background: radial-gradient(circle, #600000, #200000);
-            border-radius: 50%; z-index: 25;
-            box-shadow: 0 0 30px #ff0000, inset 0 0 10px #000;
+        .center-bud {
+            position: absolute; width: 35px; height: 35px; 
+            background: #600000; border-radius: 50%; z-index: 50;
+            box-shadow: 0 0 20px #ff0000, inset 0 0 10px #000;
         }
         
-        @keyframes rotate3d { 
-            0% { transform: rotate(0deg) scale(1.1) rotateX(20deg); } 
-            100% { transform: rotate(360deg) scale(1.1) rotateX(20deg); } 
-        }
-        .spinning-rose { animation: rotate3d 8s linear infinite; perspective: 1000px; transform-style: preserve-3d; }
-
-        /* Gold Sparkle Effects */
-        .sparkle-gold {
+        /* Gold Glitters */
+        .glitter {
             position: absolute; width: 3px; height: 3px; background: #ffd700;
             border-radius: 50%; box-shadow: 0 0 8px #ffd700;
-            animation: glitter 1.2s ease-out forwards;
+            animation: blow 0.8s ease-out forwards; z-index: 60;
         }
-        @keyframes glitter { 
-            0% { transform: scale(0) rotate(0); opacity: 1; }
-            100% { transform: scale(1.5) translate(var(--tx), var(--ty)) rotate(180deg); opacity: 0; }
+        @keyframes blow { 
+            0% { transform: translate(0,0); opacity: 1; }
+            100% { transform: translate(var(--x), var(--y)); opacity: 0; }
         }
+
+        /* 3D Spin */
+        @keyframes spin { from { transform: rotate(0deg) scale(1.1); } to { transform: rotate(360deg) scale(1.1); } }
+        .spinning { animation: spin 8s linear infinite; }
+
+        /* Proposal Logic Styles */
+        .input-field { background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 12px; width: 100%; color: white; margin-bottom: 10px; font-size: 0.85rem; }
+        .stone { position: absolute; font-size: 2rem; transition: all 0.6s ease-in-out; z-index: 100; pointer-events: none; }
     </style>
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen p-4">
 
     <div id="particle-container"></div>
 
-    <div class="fixed top-6 left-6 z-[100]">
-        <button onclick="nextScreen(7)" class="group relative bg-gradient-to-r from-red-600 to-amber-500 p-[1px] rounded-xl transition-all hover:scale-105 shadow-[0_0_20px_rgba(255,60,60,0.3)]">
-            <div class="bg-[#0a0a0a] px-5 py-3 rounded-xl flex items-center gap-4">
-                <span class="text-2xl drop-shadow-[0_0_5px_#ff0000]">🌹</span>
+    <div class="fixed top-4 left-4 z-[100]">
+        <button onclick="showScreen('rose-module')" class="bg-gradient-to-br from-red-600 to-yellow-600 p-[1px] rounded-xl hover:scale-105 transition-all shadow-lg">
+            <div class="bg-black/90 px-4 py-2 rounded-xl flex items-center gap-3">
+                <span class="text-xl">🌹</span>
                 <div class="text-left">
-                    <p class="text-[9px] text-amber-400 font-mono tracking-tighter">FEB 07 • MODULE</p>
-                    <p class="text-xs font-black text-white tracking-widest uppercase">Rose Day</p>
+                    <p class="text-[8px] text-yellow-500 font-mono">FEB 07</p>
+                    <p class="text-[10px] font-bold text-white uppercase">Rose Day</p>
                 </div>
             </div>
         </button>
     </div>
 
-    <div id="screen1" class="z-10 w-full max-w-md text-center">
-        <div class="glass p-10 rounded-3xl border-t-2 border-red-500/30">
-            <h1 class="text-3xl font-light mb-2 text-white italic tracking-tight">Ayesha & Bilal</h1>
-            <p class="text-amber-500/50 font-mono text-[9px] mb-8 uppercase tracking-[0.3em]">System Initialization v3.0</p>
-            <button onclick="nextScreen(2)" class="w-full bg-white text-black py-4 rounded-full font-bold text-[10px] tracking-widest uppercase hover:bg-red-600 hover:text-white transition-all">Start Experience</button>
+    <div id="screen1" class="screen z-10 w-full max-w-md text-center">
+        <div class="glass p-8 rounded-3xl border-t-4 border-pink-500">
+            <h1 class="text-3xl font-bold mb-2 text-white italic">Ayesha Misses Bilal</h1>
+            <p class="text-blue-400 font-mono text-[10px] mb-6 uppercase tracking-widest">LOVE_2026_SYNC</p>
+            <div id="countdown" class="text-2xl font-mono text-pink-500 mb-8 bg-black p-4 rounded-lg">00 Days Left</div>
+            <button onclick="showScreen('screen2')" class="w-full bg-green-700 py-3 rounded-md font-bold text-xs text-white uppercase">Run Initialization</button>
         </div>
     </div>
 
-    <div id="screen7" class="hidden z-10 w-full max-w-lg text-center">
-        <div class="glass p-10 rounded-[2.5rem] border border-white/5 relative overflow-hidden">
-            <div class="flex justify-between items-center mb-8">
-                <div class="text-left">
-                    <h2 class="text-2xl font-bold text-white tracking-tight">3D Rose Assembly</h2>
-                    <p class="text-[10px] text-amber-500 font-mono">ENCRYPTED_GIFT_FOR_BILAL</p>
-                </div>
-                <button onclick="nextScreen(1)" class="text-[9px] text-gray-500 hover:text-white uppercase tracking-widest">Exit</button>
+    <div id="screen2" class="screen hidden z-10 w-full max-w-2xl text-center">
+        <div class="glass p-8 rounded-2xl w-full">
+            <div class="flex justify-between w-full mb-12 px-10">
+                <div id="ayesha-bot" class="text-center"><div class="text-5xl">👩🏻‍💻</div><p class="text-[10px] text-pink-400 mt-2">Ayesha</p></div>
+                <div id="bilal-bot" class="text-center"><div class="text-5xl">👨🏻‍💻</div><p class="text-[10px] text-blue-400 mt-2">Bilal</p></div>
+            </div>
+            <p id="stone-log" class="text-sm font-mono text-red-500 h-12 mb-6">Distance.exe is hurting...</p>
+            <button id="throwBtn" onclick="throwStone()" class="bg-red-600 text-white px-8 py-3 rounded-full font-bold">Manual Override (Throw 🪨)</button>
+            <button id="quizBtn" onclick="showScreen('screen3')" class="hidden bg-green-600 text-white px-8 py-3 rounded-full font-bold">Start Quiz</button>
+        </div>
+    </div>
+
+    <div id="screen3" class="screen hidden z-10 w-full max-w-xl">
+        <div class="glass p-6 md:p-10 rounded-2xl">
+            <h2 class="text-xl font-mono text-blue-400 mb-6 border-b border-gray-700 pb-2">Assigning Variables...</h2>
+            <div class="max-h-[40vh] overflow-y-auto pr-4 text-left">
+                <label class="text-[10px] text-gray-500 uppercase">Fav Color</label><input type="text" id="q1" class="input-field">
+                <label class="text-[10px] text-gray-500 uppercase">Fav Sport</label><input type="text" id="q2" class="input-field">
+                <label class="text-[10px] text-gray-500 uppercase">Home?</label><input type="text" id="q4" class="input-field">
+                <label class="text-[10px] text-gray-500 uppercase">Fav Person? (Answer: Bilal)</label><input type="text" id="q11" class="input-field">
+            </div>
+            <button onclick="showScreen('screen5')" class="mt-6 bg-blue-600 text-white px-8 py-3 rounded-md font-bold w-full uppercase text-xs">Proceed</button>
+        </div>
+    </div>
+
+    <div id="screen5" class="screen hidden z-10 w-full max-w-md text-center">
+        <div class="glass p-10 rounded-2xl border-4 border-pink-500">
+            <h2 class="text-2xl font-bold text-white mb-8">Muhammad Bilal, will you be my Valentine?</h2>
+            <button onclick="celebrate()" class="bg-pink-600 text-white px-10 py-4 rounded-full font-bold text-xl w-full">YES! ❤️</button>
+        </div>
+    </div>
+
+    <div id="screen6" class="screen hidden z-10 w-full max-w-lg text-center">
+        <div class="glass p-8 rounded-2xl border-4 border-green-500">
+            <h2 class="text-2xl font-bold text-white mb-2">Excellent Decision!</h2>
+            <p class="text-green-400 italic mb-4">"You chose the right decision, lots of loveeee."</p>
+            <p class="text-pink-400 font-bold animate-bounce text-sm">📸 SNAPSHOT & SEND TO AYESHA!</p>
+        </div>
+    </div>
+
+    <div id="rose-module" class="screen hidden z-10 w-full max-w-md text-center">
+        <div class="glass p-8 rounded-[2.5rem] border-t-4 border-red-600">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold text-white">Rose Construction</h2>
+                <button onclick="showScreen('screen1')" class="text-[9px] text-gray-500 uppercase tracking-widest">Back</button>
             </div>
             
-            <div class="rose-stage" id="rose-stage">
-                <div class="center-core"></div>
-            </div>
+            <p id="p-count" class="text-[10px] font-mono text-yellow-500 mb-2">PETALS ATTACHED: 0/10</p>
+            <div id="rose-stage" class="rose-stage"><div class="center-bud"></div></div>
+            <div class="h-10 mb-4"><p id="p-msg" class="text-sm italic text-red-200"></p></div>
 
-            <div id="msg-container" class="h-12 mb-6">
-                <p id="petal-msg" class="text-sm font-medium text-red-200/80"></p>
-            </div>
-
-            <button id="assemble-btn" onclick="add3DPetal()" class="relative group px-12 py-4 bg-red-600 rounded-full text-white font-bold text-xs uppercase tracking-widest transition-all hover:bg-red-500 shadow-xl shadow-red-900/40">
-                Attach Petal
-            </button>
+            <button id="add-p-btn" onclick="attachPetal()" class="bg-red-600 text-white px-10 py-3 rounded-full font-bold text-xs uppercase tracking-widest">Attach Petal 🌹</button>
             
-            <div id="final-rose-cta" class="hidden animate-fade-in">
-                <h3 class="text-3xl font-black text-white mt-4 italic">Happy Rose Day!</h3>
-                <p class="text-[10px] text-amber-400 font-mono mt-2">COMPILATION SUCCESSFUL • 100% LOVE</p>
+            <div id="rose-final" class="hidden mt-4">
+                <h3 class="text-2xl font-black text-white italic">Happy Rose Day!</h3>
+                <p class="text-[9px] text-yellow-500 font-mono">100% COMPILED FOR BILAL</p>
             </div>
         </div>
     </div>
 
     <script>
-        const petalMessages = [
-            "For being my favorite person.", "For your endless support.", "For making me laugh.",
-            "For the way you care.", "For every late night call.", "For being so handsome.",
-            "For your beautiful heart.", "For choosing me.", "For your sweet messages.", "I Love You, Muhammad Bilal! ❤️"
-        ];
+        let pIndex = 0;
+        const msgs = ["For being my Dost.", "For the smiles.", "For your kindness.", "For the late nights.", "For the support.", "For choosing me.", "For your love.", "For being you.", "For our bond.", "I Love You, Bilal! ❤️"];
 
-        function nextScreen(num) {
-            document.querySelectorAll('div[id^="screen"]').forEach(s => s.classList.add('hidden'));
-            document.getElementById('screen' + num).classList.remove('hidden');
+        function showScreen(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
         }
 
-        // Elegant Gold & Rose Particles
-        function spawnParticles() {
-            const container = document.getElementById('particle-container');
-            setInterval(() => {
-                const p = document.createElement('div');
-                const isRose = Math.random() > 0.5;
-                p.className = 'particle';
-                p.innerHTML = isRose ? `<span style="color:#ff4d4d; font-size:12px">🌹</span>` : `<span style="color:#ffd700; font-size:10px">✨</span>`;
-                p.style.left = Math.random() * 100 + 'vw';
-                p.style.animationDuration = (Math.random() * 3 + 4) + 's';
-                p.style.opacity = Math.random();
-                container.appendChild(p);
-                setTimeout(() => p.remove(), 7000);
-            }, 300);
-        }
-        spawnParticles();
+        // Gold Sparkle/Rose Rain
+        setInterval(() => {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            const isRose = Math.random() > 0.5;
+            p.innerHTML = isRose ? `<span style="color:#ff3333; font-size:12px">🌹</span>` : `<span style="color:#ffd700; font-size:8px">✨</span>`;
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            document.getElementById('particle-container').appendChild(p);
+            setTimeout(() => p.remove(), 5000);
+        }, 500);
 
-        let petalIndex = 0;
-        function add3DPetal() {
-            if (petalIndex < 10) {
+        function attachPetal() {
+            if (pIndex < 10) {
                 const stage = document.getElementById('rose-stage');
                 const petal = document.createElement('div');
-                petal.className = 'petal-3d';
-                
-                // Arrange in 3D spiral
-                const angle = petalIndex * 137.5; // Golden Angle for natural look
-                const scale = 0.5 + (petalIndex * 0.05);
-                petal.style.transform = `rotate(${angle}deg) translateY(-20px) scale(${scale})`;
-                
-                setTimeout(() => petal.style.opacity = '1', 50);
+                petal.className = 'petal-unit';
+                petal.style.transform = `rotate(${pIndex * 36}deg) translateY(-8px)`;
+                petal.style.opacity = '1';
                 stage.appendChild(petal);
 
-                // Golden Glitter Explosion
-                spawnGlitter(stage);
+                // Glitter burst
+                for(let i=0; i<8; i++) {
+                    const g = document.createElement('div');
+                    g.className = 'glitter';
+                    g.style.left = '50%'; g.style.top = '50%';
+                    g.style.setProperty('--x', (Math.random()*160-80)+'px');
+                    g.style.setProperty('--y', (Math.random()*160-80)+'px');
+                    stage.appendChild(g);
+                    setTimeout(() => g.remove(), 800);
+                }
 
-                document.getElementById('petal-msg').innerText = petalMessages[petalIndex];
-                petalIndex++;
+                document.getElementById('p-msg').innerText = msgs[pIndex];
+                pIndex++;
+                document.getElementById('p-count').innerText = `PETALS ATTACHED: ${pIndex}/10`;
 
-                if (petalIndex === 10) {
-                    document.getElementById('assemble-btn').style.display = 'none';
-                    document.getElementById('rose-stage').classList.add('spinning-rose');
-                    document.getElementById('final-rose-cta').classList.remove('hidden');
+                if (pIndex === 10) {
+                    document.getElementById('add-p-btn').style.display = 'none';
+                    document.getElementById('rose-stage').classList.add('spinning');
+                    document.getElementById('rose-final').classList.remove('hidden');
                 }
             }
         }
 
-        function spawnGlitter(parent) {
-            for(let i=0; i<15; i++) {
-                const g = document.createElement('div');
-                g.className = 'sparkle-gold';
-                const rect = parent.getBoundingClientRect();
-                g.style.left = '50%';
-                g.style.top = '50%';
-                g.style.setProperty('--tx', (Math.random()*200-100) + 'px');
-                g.style.setProperty('--ty', (Math.random()*200-100) + 'px');
-                parent.appendChild(g);
-                setTimeout(() => g.remove(), 1200);
+        let stones = 0;
+        function throwStone() {
+            if (stones >= 4) {
+                document.getElementById('throwBtn').style.display = 'none';
+                document.getElementById('quizBtn').classList.remove('hidden');
+                return;
             }
+            const s = document.createElement('div');
+            s.className = 'stone'; s.innerText = '🪨';
+            const start = document.getElementById('ayesha-bot').getBoundingClientRect();
+            const end = document.getElementById('bilal-bot').getBoundingClientRect();
+            s.style.left = start.left + 'px'; s.style.top = start.top + 'px';
+            document.body.appendChild(s);
+            setTimeout(() => { s.style.left = end.left + 'px'; s.style.top = end.top + 'px'; s.style.opacity = '0'; }, 50);
+            stones++;
         }
+
+        function celebrate() { showScreen('screen6'); }
     </script>
 </body>
 </html>
